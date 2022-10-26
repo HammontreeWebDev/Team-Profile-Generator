@@ -1,0 +1,33 @@
+{
+  "name": "team-profile-generator",
+  "version": "1.0.0",
+  "description": "This CLI app will dynamically generate an HTML page with complete CSS styling that includes any and all information that you provide about you and your team members via the prompted questions.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HammontreeWebDev/Team-Profile-Generator.git"
+  },
+  "keywords": [
+    "team",
+    "generator",
+    "html",
+    "dynamic",
+    "profile"
+  ],
+  "author": "Kaileb Hammontree",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HammontreeWebDev/Team-Profile-Generator/issues"
+  },
+  "homepage": "https://github.com/HammontreeWebDev/Team-Profile-Generator#readme",
+  "dependencies": {
+    "inquirer": "^8.2.4",
+    "jest": "^24.9.0"
+  }
+}
