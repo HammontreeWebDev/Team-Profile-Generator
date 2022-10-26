@@ -1,4 +1,4 @@
-// Test file for Employee class located in lib
+// Test Suite for Employee.js in lib
 const Employee = require('../lib/Employee');
 describe('Employee', () => {
     describe('getName', () => {
