@@ -11,7 +11,7 @@ const generateTeam = team => {
                 <li>Office Number: ${manager.getOfficeNum()}</li>
             </ul>
             <div class="text-center fs-5">
-                <a href="mailTo:${manager.getEmail()}" class="card-link text-light">${manager.getEmail()}</a>
+                <a href="mailTo:${manager.getEmail()}" class="card-link text-light">Email: ${manager.getEmail()}</a>
             </div>
         </div>
     </div>
@@ -27,8 +27,8 @@ const generateTeam = team => {
                 <li>Employee ID: ${engineer.getId()}</li>
             </ul>
             <div class="text-center fs-5">
-                <a href="mailTo:${engineer.getEmail()}" class="card-link text-light">${engineer.getEmail()}</a>
-                <a href="https://github.com/${engineer.getGitHub()}" class="card-link text-light">${engineer.getGitHub()}</a>
+                <a href="mailTo:${engineer.getEmail()}" class="card-link text-light">Email: ${engineer.getEmail()}</a>
+                <a href="https://github.com/${engineer.getGitHub()}" class="card-link text-light">GitHub: ${engineer.getGitHub()}</a>
             </div>
         </div>
     </div>
@@ -41,11 +41,11 @@ const generateTeam = team => {
                     <h5 class="card-title text-center role fs-2">${intern.getRole()}</h5>
                     <h6 class="card-subtitle mb-2 text-center text-light pt-2 fs-4">${intern.getName()}</h6>
                     <ul class="card-text list-style fs-5">
-                        <li>Employee ID: ${intern.getID()}</li>
+                        <li>Employee ID: ${intern.getId()}</li>
                         <li>School: ${intern.getSchool()}</li>
                     </ul>
                     <div class="text-center fs-5">
-                        <a href="mailTo:${intern.getEmail()}" class="card-link text-light">${intern.getEmail()}</a>
+                        <a href="mailTo:${intern.getEmail()}" class="card-link text-light">Email: ${intern.getEmail()}</a>
                     </div>
                 </div>
             </div>
