@@ -1,15 +1,23 @@
 // Run the application from this file
 const inquirer = require('inquirer');
 const fs = require('fs');
-const Employee = require('./lib/Employee');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 const Manager = require('./lib/Manager');
 const questions = require('./src/questions');
+const path = require('path');
 
-// manager section
+const DIST_DIR = path.resolve(__dirname, 'dist');
+const distPath = path.join(DIST_DIR, 'team.html');
+
+const generateTeam = require('./src/page-template.js');
+
+let teamMembers = [];
 let managerQuestions = [];
+let engineerQuestions = [];
+let internQuestions = [];
 
+// Manager Questions
 const managerName = new questions('input', 'managerName', 'What is the name of the manager?');
 managerQuestions.push(managerName);
 
@@ -23,8 +31,6 @@ const managerOfficeNum = new questions('input', 'officenumber', 'What is the off
 managerQuestions.push(managerOfficeNum);
 
 // Engineer Questions
-let engineerQuestions = [];
-
 const engineerName = new questions('input', 'engineerName', 'What is the name of the engineer?');
 engineerQuestions.push(engineerName);
 
@@ -38,8 +44,6 @@ const engineerGitHub = new questions('input', 'engineerGitHub', 'What is the Git
 engineerQuestions.push(engineerGitHub);
 
 // Intern Questions
-let internQuestions = [];
-
 const internName = new questions('input', 'internName', 'What is the name of the intern?');
 internQuestions.push(internName);
 
@@ -54,7 +58,6 @@ internQuestions.push(internSchool);
 
 // menu selection for intern or engineer
 const menuSelection = new questions('list', 'menuSelection', 'Do you want to add any more team members?', ['Engineer', 'Intern', 'No, thanks. I am finished for now!'])
-// run inquirer
 
 // -----Manager Section------
 async function init() {
@@ -62,9 +65,10 @@ async function init() {
 
     const teamManager = new Manager(getManager.managerName, getManager.managerId, getManager.managerEmail, getManager.officenumber);
 
+    teamMembers.push(teamManager);
+
     // call menu selection function for adding team members
     menu();
-    // console.log(teamManager);
 }
 // -----Menu Choice Section-----
 
@@ -74,18 +78,14 @@ async function menu() {
     if (getMenu.menuSelection == 'Engineer') {
         engineerPrompt();
     }
-    else if (getMenu.menuSelection == 'Intern'){
+    else if (getMenu.menuSelection == 'Intern') {
         internPrompt();
     }
     else {
-        // build HTML (use source template?) and THEN ====>
-        console.log('Ok, thanks for using the Team Profile Generator! Check out your team information, located in the lib folder!');
+        htmlBuilder();
     }
 }
 // -----Engineer Section-----
-
-// array for engineer personell
-let engineerTeam = [];
 
 // Engineer Prompt
 async function engineerPrompt() {
@@ -93,17 +93,13 @@ async function engineerPrompt() {
 
     const addEngineer = new Engineer(getEngineer.engineerName, getEngineer.engineerId, getEngineer.engineerEmail, getEngineer.engineerGitHub);
 
-    engineerTeam.push(addEngineer);
+    teamMembers.push(addEngineer);
 
     // Call the menu function again to add more team members
     menu();
-    // console.log(engineerTeam);
 }
 
 // -----Intern Section-----
-
-// array for Intern personell
-let internTeam = [];
 
 // Intern Prompt
 async function internPrompt() {
@@ -111,11 +107,21 @@ async function internPrompt() {
 
     const addIntern = new Intern(getIntern.internName, getIntern.internId, getIntern.internEmail, getIntern.internSchool);
 
-    internTeam.push(addIntern);
+    teamMembers.push(addIntern);
 
     // call menu function to add more team members
     menu();
-    // console.log(internTeam);
+}
+// function to write html to file
+function htmlBuilder () {
+    fs.writeFile(distPath, generateTeam(teamMembers), (err) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            console.log('Your team has been created!');
+        }
+    })
 }
 
 // call init function
