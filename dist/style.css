@@ -1,0 +1,18 @@
+body {
+    font-family: 'Karla', sans-serif;
+}
+header{
+    border-bottom: 3px solid white;
+    border-top: 3px solid white;
+}
+.list-style {
+    list-style: none;
+}
+.role {
+    padding-bottom: 5%;
+    border-bottom: 3px solid black;
+}
+.custom-card {
+    border: 3px solid black;
+    border-radius: 15px;
+}

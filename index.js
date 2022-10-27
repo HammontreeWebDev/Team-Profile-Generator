@@ -78,6 +78,7 @@ async function menu() {
         internPrompt();
     }
     else {
+        // build HTML (use source template?) and THEN ====>
         console.log('Ok, thanks for using the Team Profile Generator! Check out your team information, located in the lib folder!');
     }
 }
