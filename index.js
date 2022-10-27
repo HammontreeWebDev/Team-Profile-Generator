@@ -56,14 +56,17 @@ internQuestions.push(internSchool);
 const menuSelection = new questions('list', 'menuSelection', 'Do you want to add any more team members?', ['Engineer', 'Intern', 'No, thanks. I am finished for now!'])
 // run inquirer
 
-// Manager Section
+// -----Manager Section------
 async function init() {
     const getManager = await inquirer.prompt(managerQuestions);
+
     const teamManager = new Manager(getManager.managerName, getManager.managerId, getManager.managerEmail, getManager.officenumber);
 
     // call menu selection function for adding team members
     menu();
+    // console.log(teamManager);
 }
+// -----Menu Choice Section-----
 
 // Menu to choose whether to add more team members or end the application
 async function menu() {
@@ -77,6 +80,41 @@ async function menu() {
     else {
         console.log('Ok, thanks for using the Team Profile Generator! Check out your team information, located in the lib folder!');
     }
+}
+// -----Engineer Section-----
+
+// array for engineer personell
+let engineerTeam = [];
+
+// Engineer Prompt
+async function engineerPrompt() {
+    const getEngineer = await inquirer.prompt(engineerQuestions);
+
+    const addEngineer = new Engineer(getEngineer.engineerName, getEngineer.engineerId, getEngineer.engineerEmail, getEngineer.engineerGitHub);
+
+    engineerTeam.push(addEngineer);
+
+    // Call the menu function again to add more team members
+    menu();
+    // console.log(engineerTeam);
+}
+
+// -----Intern Section-----
+
+// array for Intern personell
+let internTeam = [];
+
+// Intern Prompt
+async function internPrompt() {
+    const getIntern = await inquirer.prompt(internQuestions);
+
+    const addIntern = new Intern(getIntern.internName, getIntern.internId, getIntern.internEmail, getIntern.internSchool);
+
+    internTeam.push(addIntern);
+
+    // call menu function to add more team members
+    menu();
+    // console.log(internTeam);
 }
 
 // call init function
