@@ -52,16 +52,32 @@ internQuestions.push(internEmail);
 const internSchool = new questions('input', 'internSchool', 'What is the name of the school that the intern is attending?');
 internQuestions.push(internSchool);
 
-// 
-
+// menu selection for intern or engineer
+const menuSelection = new questions('list', 'menuSelection', 'Do you want to add any more team members?', ['Engineer', 'Intern', 'No, thanks. I am finished for now!'])
 // run inquirer
 
 // Manager Section
-inquirer
-.prompt(managerQuestions)
-.then(answers => {
-    // create manager
-    const teamManager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.officenumber);
-})
+async function init() {
+    const getManager = await inquirer.prompt(managerQuestions);
+    const teamManager = new Manager(getManager.managerName, getManager.managerId, getManager.managerEmail, getManager.officenumber);
 
-// inquirer for intern and engineer sections
+    // call menu selection function for adding team members
+    menu();
+}
+
+// Menu to choose whether to add more team members or end the application
+async function menu() {
+    const getMenu = await inquirer.prompt([menuSelection]);
+    if (getMenu.menuSelection == 'Engineer') {
+        engineerPrompt();
+    }
+    else if (getMenu.menuSelection == 'Intern'){
+        internPrompt();
+    }
+    else {
+        console.log('Ok, thanks for using the Team Profile Generator! Check out your team information, located in the lib folder!');
+    }
+}
+
+// call init function
+init();
