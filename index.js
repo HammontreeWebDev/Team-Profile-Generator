@@ -10,7 +10,7 @@ const path = require('path');
 const DIST_DIR = path.resolve(__dirname, 'dist');
 const distPath = path.join(DIST_DIR, 'team.html');
 
-const generateTeam = require('./src/page-template.js');
+const render = require('./src/page-template.js');
 
 let teamMembers = [];
 let managerQuestions = [];
@@ -114,7 +114,7 @@ async function internPrompt() {
 }
 // function to write html to file
 function htmlBuilder () {
-    fs.writeFile(distPath, generateTeam(teamMembers), (err) => {
+    fs.writeFile(distPath, render(teamMembers), (err) => {
         if (err) {
             console.log(err);
         }
